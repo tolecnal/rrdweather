@@ -1,0 +1,5 @@
+# weather db update for rrdweather
+#
+# You may need to change the user executing the script
+#
+*/5 * * * *     www-data /usr/share/rrdweather/rrdweather_cron.sh
