@@ -36,7 +36,7 @@ do
 		ping -c 4 www.google.com
 		echo ""
 	else
-		ping -q -c 2 xoap.weather.com > /dev/null 2>&1
+		curl -q yahoowidget.weather.com > /dev/null 2>&1
 	fi
 
 	sleep 3s
@@ -47,10 +47,10 @@ do
 		then
 			echo "2. XML retrieval from xoap.weather.com"
 			echo "======================================"
-			wget "http://xoap.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
+			wget "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
 			echo ""
 		else
-			wget -q "http://xoap.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
+			wget -q "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
 		fi
 
 		mv "${ZIP}?cc=*&unit=${UNIT}" "${ZIP}.xml"
