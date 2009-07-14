@@ -26,7 +26,6 @@ do
 	fi
 	
 	cd ${TMPDIR}
-	rm ${TMPDIR}/${ZIP}.xml -f
 
 	if [ $DEBUG = "y" ]	
 	then

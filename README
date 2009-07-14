@@ -27,7 +27,8 @@ Changelog
 
 Version 0.43 - July 2009 :
 - db_update.sh 
-  * fixed broken link to data feed 
+  * fixed broken link to data feed. Thanks to fugitif67 
+  * fixed null values when the connection is down. Thanks to fugitif67
 
 
 Version 0.42 - October 2007 :
