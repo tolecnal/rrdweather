@@ -52,7 +52,7 @@ do
 			wget -q "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
 		fi
 
-		mv "${ZIP}?cc=*&unit=${UNIT}" "${ZIP}.xml"
+		mv -f "${ZIP}?cc=*&unit=${UNIT}" "${ZIP}.xml"
 		sleep 5s
 		
 		if [ ${UNIT} = "m" ]

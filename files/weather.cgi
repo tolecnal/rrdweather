@@ -10,7 +10,7 @@ use POSIX qw(strftime);
 use RRDs;
 use XML::Simple;
 
-my $VERSION = "0.42";
+my $VERSION = "0.43";
 
 ############################################################
 ############## EDIT THESE VALUES BELOW #####################
