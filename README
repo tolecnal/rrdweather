@@ -20,9 +20,15 @@ Contributors
 - Gregory Bittan
 - Gregory Guthrie
 - Heikki Hokkanen
+- "fugitif67"
 
 
 Changelog
+
+Version 0.43 - July 2009 :
+- db_update.sh 
+  * fixed broken link to data feed 
+
 
 Version 0.42 - October 2007 :
 - weather.cgi 
