@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 # RRDWeather
 # Released under the GNU General Public License
@@ -59,7 +59,7 @@ if ( ! -r $xmlfile) {
 		print "XML source cannot be read !\n\n";	
 		print "Make sure you are trying to display a city monitored by RRDWeather.\n\n";
 		print "The XML source may temporarily be unavailable. The page will reload in 5 seconds.\n\n";
-		print "If the problem persists, then there is probably an issue with this configuration.";
+		print "If the problem persists, then there's probably an issue with this configuration.";
 		exit 1;
 	}
 }
@@ -91,10 +91,10 @@ elsif($system eq "e") {
 }
 
 my @graphs = (
-	{ title => 'Daily Graphs',   seconds => 3600*24,        },
-	{ title => 'Weekly Graphs',  seconds => 3600*24*7,      },
-	{ title => 'Monthly Graphs', seconds => 3600*24*31,     },
-	{ title => 'Yearly Graphs',  seconds => 3600*24*365, 	},
+	{ title => 'Daily Graphs',   shorttitle => 'd', seconds => 3600*24,        },
+	{ title => 'Weekly Graphs',  shorttitle => 'w', seconds => 3600*24*7,      },
+	{ title => 'Monthly Graphs', shorttitle => 'm', seconds => 3600*24*31,     },
+	{ title => 'Yearly Graphs',  shorttitle => 'y', seconds => 3600*24*365, 	},
 );
 
 sub graph_temperature($$$)
@@ -360,23 +360,23 @@ HEADER
 		print "<table>\n";
 		print "<tr>\n";
 		print "<td colspan=\"2\">\n";
-		my $h2_id = $graphs[$n]{title};
-		my $next_h2_id = $graphs[$n+1]{title};
-		$h2_id =~ s/ /_/;
-		$next_h2_id =~ s/ /_/;
-		print "<div class=\"graphtitle\"><h2 id=\"". $h2_id ."\"><a href=\"#". $h2_id ."\">".$graphs[$n]{title}."</a></h2></div>\n";
+
+		my $graphheader = $graphs[$n]{shorttitle};
+		my $next_graph = $graphs[$n+1]{shorttitle};
+
+		print "<div class=\"graphtitle\"><h2 id=\"". $graphheader ."\"><a href=\"#". $graphheader ."\">".$graphs[$n]{title}."</a></h2></div>\n";
 		print "</td>\n";
 		print "</tr>\n";
 		print "<tr>\n";
-		print "<td><a href=\"#". $next_h2_id . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-temperature\" alt=\"Temperature\" /></a></td>\n";
-		print "<td><a href=\"#". $next_h2_id . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-humidity\" alt=\"Humidity\" /></a></td>\n";
+		print "<td><a href=\"#". $next_graph . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-temperature\" alt=\"Temperature\" /></a></td>\n";
+		print "<td><a href=\"#". $next_graph . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-humidity\" alt=\"Humidity\" /></a></td>\n";
 		print "</tr>\n";
 		print "<tr>\n";
-		print "<td><a href=\"#". $next_h2_id . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-wind\" alt=\"Wind\" /></a></td>\n";
-		print "<td><a href=\"#". $next_h2_id . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-pressure\" alt=\"Pressure\" /></a></td>\n";
+		print "<td><a href=\"#". $next_graph . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-wind\" alt=\"Wind\" /></a></td>\n";
+		print "<td><a href=\"#". $next_graph . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-pressure\" alt=\"Pressure\" /></a></td>\n";
 		print "</tr>\n";
 		print "<tr>\n";
-		print "<td colspan=\"2\"><a href=\"#". $next_h2_id . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-uv\" alt=\"UV index\" /></a></td>\n";
+		print "<td colspan=\"2\"><a href=\"#". $next_graph . "\"><img src=\"$scriptname?zip=$zip&amp;file=$n-uv\" alt=\"UV index\" /></a></td>\n";
 		print "</tr>\n";
 		print "</table>\n";
 	}
