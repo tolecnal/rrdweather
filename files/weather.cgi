@@ -58,8 +58,8 @@ if ( ! -r $xmlfile) {
 		print "<pre>RRDWeather $VERSION\n---------------\n\n";	
 		print "XML source cannot be read !\n\n";	
 		print "Make sure you are trying to display a city monitored by RRDWeather.\n\n";
-		print "The XML source may temporarily be unavailable. The page will reload within 5 seconds.\n\n";
-		print "If the problem persists, there's a problem with this configuration.";
+		print "The XML source may temporarily be unavailable. The page will reload in 5 seconds.\n\n";
+		print "If the problem persists, then there is probably an issue with this configuration.";
 		exit 1;
 	}
 }
