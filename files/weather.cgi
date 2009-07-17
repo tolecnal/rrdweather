@@ -9,8 +9,9 @@ use CGI ();
 use POSIX qw(strftime);
 use RRDs;
 use XML::Simple;
+use Config::File;
 
-my $VERSION = "0.43";
+my $VERSION = "0.44";
 
 ############################################################
 ############## EDIT THESE VALUES BELOW #####################
@@ -32,12 +33,13 @@ my $cgi = CGI->new();
 my $zip = $cgi->param("zip");
 my $uri = $ENV{SCRIPT_URI};
 
+my $config = Config::File::read_config_file('/etc/rrdweather.conf');
+$config->{ZIPS} =~ s/^"|"$//g; # remove quotes
+
+
 if ( ! $zip ) {
-	print "Content-Type: text/html\n\n";
-	print "<pre>RRDWeather $VERSION\n---------------\n\n";	
-	print "Please specify a city to display.\n\n";
-	print "Example : $uri?zip=12345";
-	exit 1;
+	my @zips = split(/ +/, $config->{ZIPS});
+	$zip = $zips[0];
 }
 
 # Fetching city name from XML file
@@ -364,6 +366,10 @@ HEADER
 		my $graphheader = $graphs[$n]{shorttitle};
 		my $next_graph = $graphs[$n+1]{shorttitle};
 
+		if (not defined($next_graph)) {
+			$next_graph = '';
+		}
+
 		print "<div class=\"graphtitle\"><h2 id=\"". $graphheader ."\"><a href=\"#". $graphheader ."\">".$graphs[$n]{title}."</a></h2></div>\n";
 		print "</td>\n";
 		print "</tr>\n";
@@ -413,6 +419,10 @@ sub main()
         mkdir "$tmp_dir/$zip", 0777 unless -d "$tmp_dir/$zip";
 
         my $img = $ENV{QUERY_STRING};
+		if (length($img) < 1) {
+			$img = '?zip='. $zip;
+		}
+
         if(defined $img and $img =~ /\S/) {
                 if($img =~ /^zip=([a-zA-Z0-9]{5,8})&file=(\d+)-temperature$/) {
                         my $file = "$tmp_dir/$1/RRDWeather_$2_temperature.png";
