@@ -46,13 +46,14 @@ do
 		then
 			echo "2. XML retrieval from xoap.weather.com"
 			echo "======================================"
-			wget "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
+			wget -O "${ZIP}.xml" "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}&link=xoap&prod=xoap&par=${PARTNERID}&key=${LICENSEKEY}"
 			echo ""
 		else
-			wget -q "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}"
+			wget -q -O "${ZIP}.xml" "http://yahoowidget.weather.com/weather/local/${ZIP}?cc=*&unit=${UNIT}&link=xoap&prod=xoap&par=${PARTNERID}&key=${LICENSEKEY}"
 		fi
 
-		mv -f "${ZIP}?cc=*&unit=${UNIT}" "${ZIP}.xml"
+		# mv -f "${ZIP}?cc=*&unit=${UNIT}" "${ZIP}.xml"
+        # No longer needed due to weather.com API changes
 		sleep 5s
 		
 		if [ ${UNIT} = "m" ]
